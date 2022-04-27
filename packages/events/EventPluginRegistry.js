@@ -231,6 +231,9 @@ export function injectEventPluginsByName(
       !namesToPlugins.hasOwnProperty(pluginName) ||
       namesToPlugins[pluginName] !== pluginModule
     ) {
+      // Learning Note by weibin:
+      // invariant 的作用是如果 condition（第一个参数）为 false，则抛出一个错误，错误提示为后续参数决定
+      // 所以这里的意思就是假设 pluginName 被注册过，但是注册的模块不是当前的模块（不是同一个才有可能来到这里），那么就抛出一个错误
       invariant(
         !namesToPlugins[pluginName],
         'EventPluginRegistry: Cannot inject two different event plugins ' +
